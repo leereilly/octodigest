@@ -1,32 +1,36 @@
-require 'sinatra'
-require 'json'
-require 'erb'
+require 'sinatra/base'
+require 'mustache/sinatra'
 
-
+class Octodigest < Sinatra::Base
   enable :static
-  views = './views'
+  set :public, './public'
+
+  register Mustache::Sinatra
+  require './views/layout'
+
+  set :mustache, {
+    :views => './views',
+    :templates => 'templates/'
+  }
 
   helpers do
-    require './lib/helpers'
+    require 'gah'
   end
 
   get "/" do
-    erb :index
+    mustache :index
   end
 
   post "/" do
-    redirect("#{h params[:user]}/#{h params[:repo]}")
+    redirect("#{params[:user]}/#{params[:repo]}")
   end
 
   get "/:user/:repo" do
-    @data = ghet("http://github.com/api/v2/json/repos/show/#{h params[:user]}/#{h params[:repo]}/contributors")
-    if @data.has_key? "error"
-      @title = "Not Found..."
-      erb :nf
-    else
-      @title = "#{h params[:user]}/#{h params[:repo]}"
-      erb :repo
-    end
+    
+    @gah = Gah::Commits.new("#{params[:user]}/#{params[:repo]}")
+    
+    @title = "#{params[:user]}/#{params[:repo]}"
+    mustache :repo
   end
 
   get "/:user/:repo/:tag" do
@@ -44,3 +48,4 @@ require 'erb'
     erb :nf
   end
 
+end

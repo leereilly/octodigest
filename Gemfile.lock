@@ -1,8 +1,14 @@
+GIT
+  remote: git://github.com/fyskij/gah
+  revision: 534ddec1a520f1bd84b4f4b6f37f51e0dbd86f61
+  specs:
+    gah (0.0.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
     rack (1.2.2)
-    sinatra (1.2.1)
+    sinatra (1.2.2)
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
     tilt (1.2.2)
@@ -11,4 +17,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  gah!
   sinatra

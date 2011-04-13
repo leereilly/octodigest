@@ -1,0 +1,47 @@
+<div id="text"> <a href="http://github.com/{{user}}/{{repo}}">{{user}}/{{repo}}</a> </div>
+
+<hr>
+<ul id="nav">
+  <li><a href="#">tags</a>
+  <ul>
+    {{#tags}}
+      <li><a href="/{{user}}/{{repo}}/{{k}}">{{k}}</a></li>
+    {{/tags}}
+  </ul>
+
+  <div class="clear"></div>
+</ul>
+
+<div class="clear"></div>
+<div id="title"> <h1> Commits: {{contributions}} / Committers: {{contributors.length}} </h1></div>
+
+<table align="center">
+  <thead>
+    <tr>
+      <th>Avatar</th>
+      <th>Name</th>
+      <th>Contributions</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#contributors}}
+
+      <tr>
+        <td>
+          <a href="http://github.com/{{login}}/">
+            <img src="http://www.gravatar.com/avatar.php?gravatar_id={{gravatar_id}}" width="40" height="40" />
+          </a>
+        </td>
+
+        <td>
+
+          {{name}}  <a href="http://github.com/{{login}}/"> ( {{login}} )</a>
+
+        </td>
+        <td><a href="https://github.com/{{user}}/{{repo}}/commits/master?author={{login}}"> {{contributions}} </a></td>
+
+      </tr>
+    {{/contributors}}
